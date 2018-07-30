@@ -94,9 +94,11 @@ $(function() {
       audio: {deviceId: audioSource ? {exact: audioSource} : undefined},
       video: {deviceId: videoSource ? {exact: videoSource} : undefined},
     };
-    navigator.mediaDevices.getUserMedia(constraints).then(stream => {
-      $('#my-video').get(0).srcObject = stream;
-      localStream = stream;
+navigator.mediaDevices.getUserMedia({video: false, audio: true})
+    .then(function (stream) {
+        // Success
+        $('#my-video').get(0).srcObject = stream;
+        localStream = stream;
 
       if (room) {
         room.replaceStream(stream);
